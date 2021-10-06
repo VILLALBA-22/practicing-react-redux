@@ -1,8 +1,10 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import AccountCircle from '@material-ui/core/AccountCircle'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import AutoComplete from '../autoComplete/index'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import './styles.css'
 
 export default function Page({
 	text,
@@ -16,6 +18,12 @@ export default function Page({
 				<Typography variant='h6' color='inherit'>
 					Andres Villalba
 				</Typography>
+				<AutoComplete
+					text={text}
+					suggestions={suggestions}
+					onChangeText={onChangeText}
+					onChangeSelection={onChangeSelection}
+				/>
 				<AccountCircle />
 			</Toolbar>
 		</AppBar>
