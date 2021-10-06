@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Page from './Page'
+import { withRouter } from 'react-router-dom'
 import findSuggestion from '../../redux/actions/findSuggestion'
+import findResults from '../../redux/actions/findResult'
 
-function IAppBar({ suggestions, findSuggestion }) {
+function IAppBar({ suggestions, findSuggestion, findResults, history }) {
 	const [text, setText] = useState('')
-	const [selection, setSelection] = useState('')
 
 	const handleChangeText = text => {
 		findSuggestion(text)
 		setText(text)
 	}
-	const handleChangeSelection = text => {}
+	const handleChangeSelection = text => {
+		setText(text)
+		findResults(text)
+		history.push('/results')
+	}
 	return (
 		<Page
 			text={text}
@@ -30,6 +35,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
 	findSuggestion,
+	findResults,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IAppBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IAppBar))

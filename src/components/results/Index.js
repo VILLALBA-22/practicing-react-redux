@@ -1,17 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import Page from './Page'
 
-function Details({ suggestions }) {
-	console.log(suggestions)
-
-	return <Page suggestions={suggestions} />
+function Results({ results, history }) {
+	return <Page results={results} goTo={path => history.push(path)} />
 }
 
 const mapStateToProps = state => {
 	return {
-		suggestions: state.suggestions,
+		results: state.result,
 	}
 }
 
-export default connect(mapStateToProps)(Details)
+export default withRouter(connect(mapStateToProps)(Results))

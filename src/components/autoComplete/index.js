@@ -27,7 +27,7 @@ function Autocomplete({ suggestions, onChangeText, onChangeSelection, text }) {
 					}
 				}}
 				onBlur={() => {
-					setTimeout(() => setIsOpen(false), 100)
+					setTimeout(() => setIsOpen(false), 1000)
 				}}
 				onFocus={() => {
 					if (text) {
@@ -37,23 +37,26 @@ function Autocomplete({ suggestions, onChangeText, onChangeSelection, text }) {
 				onKeyPress={event => {
 					if (event.key === 'Enter' && text) {
 						onChangeSelection(text)
+						setIsOpen(false)
 					}
 				}}
 			/>
 			{isOpen && (
 				<Paper className='container-results' square>
-					{suggestions.map(suggestion => (
-						<MenuItem
-							key={suggestion.id}
-							component='div'
-							onClick={() => {
-								onChangeSelection(suggestion.title)
-								setIsOpen(false)
-							}}
-						>
-							{suggestion.title}
-						</MenuItem>
-					))}
+					{suggestions.map(suggestion => {
+						return (
+							<MenuItem
+								key={suggestion.id}
+								component='div'
+								onClick={e => {
+									onChangeSelection(suggestion.title)
+									setIsOpen(false)
+								}}
+							>
+								{suggestion.title}
+							</MenuItem>
+						)
+					})}
 				</Paper>
 			)}
 		</div>
